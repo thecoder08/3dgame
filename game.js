@@ -21,15 +21,29 @@ window.onresize = function() {
 // skybox
 var skyboxGeometry = new THREE.BoxGeometry(30, 30, 30);
 var skyboxMaterials = [
-    new THREE.MeshBasicMaterial({color: 0x00ffff, side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({color: 0x00ffff, side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({color: 0x00ffff, side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({color: 0x00ffff, side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({color: 0x00ffff, side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('sky.jpg'), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('sky.jpg'), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('sky.jpg'), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('ground.jpg'), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('sky.jpg'), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('sky.jpg'), side: THREE.BackSide}),
 ]
 var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterials);
 scene.add(skybox);
+
+// cow
+var cowGeometry = new THREE.BoxGeometry(1, 1, 1);
+var cowMaterials = [
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('cow.jpeg')}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('cow.jpeg')}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('cow.jpeg')}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('cow.jpeg')}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('cow.jpeg')}),
+    new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('cow.jpeg')}),
+]
+var cow = new THREE.Mesh(cowGeometry, cowMaterials);
+cow.position.y = -14
+scene.add(cow);
 
 // controls
 var controls = new THREE.PointerLockControls(camera, document.body);
@@ -93,6 +107,18 @@ function loop() {
     }
     else {
         yvelocity -= 0.01;
+    }
+    if (cow.position.x > camera.position.x) {
+        cow.position.x -= 0.05;
+    }
+    if (cow.position.x < camera.position.x) {
+        cow.position.x += 0.05;
+    }
+    if (cow.position.z > camera.position.z) {
+        cow.position.z -= 0.05;
+    }
+    if (cow.position.z < camera.position.z) {
+        cow.position.z += 0.05;
     }
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
