@@ -1,4 +1,5 @@
 // setup
+var fpscounter = 0;
 var yvelocity = 0;
 var locked = false;
 var wDown = false;
@@ -85,9 +86,13 @@ document.onkeyup = function(event) {
         dDown = false;
     }
 }
+document.onclick = function() {
+    controls.lock();
+}
 
 // render loop
 function loop() {
+    fpscounter++;
     if (wDown) {
         controls.moveForward(0.1);
     }
@@ -124,3 +129,7 @@ function loop() {
     requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
+setInterval(function() {
+   console.log('FPS: ' + fpscounter);
+   fpscounter = 0; 
+}, 1000);
