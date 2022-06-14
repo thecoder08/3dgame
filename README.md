@@ -7,3 +7,5 @@ git clone https://github.com/thecoder08/3dgame.git
 cd 3dgame
 path/to/nw .
 ```
+
+cow
