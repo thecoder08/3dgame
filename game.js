@@ -48,7 +48,7 @@ scene.add(cow);
 
 // controls
 var controls = new THREE.PointerLockControls(camera, document.body);
-nw.Window.get().enterFullscreen();
+//nw.Window.get().enterFullscreen();
 controls.lock();
 document.onkeydown = function(event) {
     if (event.code == 'KeyW') {
